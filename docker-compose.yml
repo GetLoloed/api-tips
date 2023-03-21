@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=your_password
+      - DB_NAME=your_database_name
+
+  db:
+    image: "mysql:8.0"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password
+      MYSQL_DATABASE: your_database_name
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

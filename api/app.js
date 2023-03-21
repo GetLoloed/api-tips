@@ -1,11 +1,14 @@
+// Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./config/db');
-const servicesRoutes = require('./routes/servicesRoutes');
-const tipsRoutes = require('./routes/tipsRoutes');
-const usersRoutes = require('./routes/usersRoutes');
+const sequelize = require('./config/db'); // Import Sequelize database connection
+const servicesRoutes = require('./routes/servicesRoutes'); // Import services routes
+const tipsRoutes = require('./routes/tipsRoutes'); // Import tips routes
+const usersRoutes = require('./routes/usersRoutes'); // Import users routes
 
-const { swaggerUi, specs } = require('./swagger');
+// Import Swagger setup
+const { swaggerUi, swaggerDocs } = require('./swagger');
+
 function startServer() {
     // Create Express app
     const app = express();
@@ -16,7 +19,7 @@ function startServer() {
     // Parse incoming request bodies in JSON format
     app.use(bodyParser.json());
 
-    // Test database connection
+    // Test database connection using Sequelize
     sequelize
         .authenticate()
         .then(() => {
@@ -26,17 +29,19 @@ function startServer() {
             console.error('Unable to connect to the database:', err);
         });
 
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+    // Use Swagger setup from the separate file
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-    // Add services and tips routes
+    // Add services, tips, and users routes to the app
     app.use('/services', servicesRoutes);
     app.use('/tips', tipsRoutes);
     app.use('/users', usersRoutes);
 
-    // Start server
+    // Start the server
     app.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
 }
 
+// Export the function for starting the server
 module.exports = startServer;
