@@ -1,8 +1,5 @@
 # API TIPS - API Documentation ????
 
-[![Build Status](https://travis-ci.org/GetLoloed/api-tips.svg?branch=master)](https://travis-ci.org/GetLoloed/api-tips)
-[![Coverage Status](https://coveralls.io/repos/github/GetLoloed/api-tips/badge.svg?branch=master)](https://coveralls.io/github/GetLoloed/api-tips?branch=master)
-
 ### Description
 
 This is the API for the TIPS application. It is a RESTful API built with Node.js, Express, and MySQL. It is used to
