@@ -6,9 +6,13 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Your API Title',
+            title: 'Tips API',
             version: '1.0.0',
-            description: 'Your API Description',
+            description: 'Documentation for Tips API' +
+                'This is a simple CRUD API application made with Express and documented with Swagger',
+            contact: {
+                name: 'Tips API Support'
+            }
         },
     },
     apis: ['./routes/*.js'], // Path to the API docs
